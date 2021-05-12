@@ -1,0 +1,16 @@
+.popup__discription {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 28px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.22;
+    color: black;
+    padding: 0 0 10px 0;
+}
+
+.popup__discription:focus {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}

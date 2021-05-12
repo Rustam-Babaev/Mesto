@@ -1,0 +1,57 @@
+/* Добрый день
+
+Прошу прощения, в скопированном файле фигмы сместил блок галереи и подумал что это офф.размеры, сейчас проверил на сайте и нашел ошибку.
+
+С уважением, Рустам Бабаев */
+
+@import url(../vendor/normalize.css);
+@import url(../fonts/fonts.css);
+@import url(../blocks/page/page.css);
+
+/* header */
+
+@import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+/* profile */
+
+@import url(../blocks/page/__profile/page__profile.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__edit-vector/profile__edit-vector.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__add-vector/profile__add-vector.css);
+
+/* cards */
+
+@import url(../blocks/page/__cards/page__cards.css);
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__footer/card__footer.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__footer-wrapper/card__footer-wrapper.css);
+
+/* footer */
+
+@import url(../blocks/page/__footer/page__footer.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+/* popup */
+
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks//popup/__form/popup__form.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__nickname/popup__nickname.css);
+@import url(../blocks/popup/__discription/popup__discription.css);
+@import url(../blocks/popup/__submit/popup__submit.css);
+@import url(../blocks/popup/_opened/popup_opened.css);

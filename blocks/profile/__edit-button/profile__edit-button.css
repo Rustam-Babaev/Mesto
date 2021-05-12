@@ -1,0 +1,28 @@
+.profile__edit-button {
+    position: relative;
+    top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 18px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    background-color: black;
+    width: 24px;
+    height: 24px;
+    transition: 0.3s;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 995px) {
+    .profile__edit-button {
+        top: 0;
+        width: 18px;
+        height: 18px;
+        margin: 0 0 0 10px;
+    }
+}

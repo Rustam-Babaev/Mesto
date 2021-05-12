@@ -1,0 +1,15 @@
+.profile__edit-vector {
+    background-image: url(../../../images/edit.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 10px;
+    height: 10px;
+}
+
+@media screen and (max-width: 995px) {
+    .profile__edit-vector {
+        min-width: 7.5px;
+        min-height: 7.5px;
+    }
+}
