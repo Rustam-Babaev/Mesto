@@ -11,25 +11,20 @@
 <body class="page">
 
     <header class="header page__header">
-        <img src="./images/logo.svg" class="header__logo"></img>
+        <img src="./images/logo.svg" alt="Логотип Mesto russia" class="header__logo">
     </header>
 
     <main class="content">
         <section class="profile page__profile">
             <img src="./images/Avatar.jpg" alt="аватар пользователя" class="profile__avatar">
             <div class="profile__info">
-                <h1 class="profile__title">
-                    Жак-Ив Кусто
-                    <button class="profile__edit-button">
-                      <div class="profile__edit-vector"></div>
-                    </button>
-                </h1>
-
+                <div class="profile__info-wrapper">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button"></button>
+                </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add-button">
-          <div class="profile__add-vector"></div>
-        </button>
+            <button class="profile__add-button"></button>
         </section>
 
         <section class="cards page__cards">
@@ -93,16 +88,15 @@
                 </figcaption>
             </figure>
         </section>
-
     </main>
 
     <footer class="footer page__footer">
-        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
     <div class="popup">
         <div class="popup__container">
-            <form action="" class="popup__form">
+            <form class="popup__form">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input type="text" class="popup__nickname">
                 <input type="text" class="popup__discription">
@@ -112,7 +106,7 @@
         <button class="popup__close-button"></button>
     </div>
 
-
+    <script src="./js/popup.js"></script>
 </body>
 
 </html>

@@ -11,6 +11,7 @@
     background-size: contain;
     width: 58px;
     height: 58px;
+    transition: 0.3s;
 }
 
 .popup__close-button:hover {

@@ -1,0 +1,14 @@
+.card__like_active {
+    background-image: url(../../../../images/like-black.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-width: 22px;
+    height: 19px;
+    transition: 0.3s;
+    border: none;
+    background-color: white;
+}
+
+.card__like_active:hover {
+    opacity: 1;
+}
