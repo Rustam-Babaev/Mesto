@@ -20,7 +20,7 @@
     * Media-queries
     * Calc
     * Псевдоклассы
-*Java-script
+* Java-script
     * Base
     * DOM
     * Events
@@ -29,4 +29,4 @@
 * Файловая структура Nested
 * Responsive design
 
-Ссылка на работу: [russian-travel](https://rustam-babaev.github.io/russian-travel/)
+Ссылка на работу: [Mesto](https://rustam-babaev.github.io/Mesto/)
