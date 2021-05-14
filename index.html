@@ -29,7 +29,9 @@
 
         <section class="cards page__cards">
             <figure class="card">
-                <img src="./images/Santorini.jpg" alt="город на скале с включенным ночным освещением и мельницами на заднем фоне" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Santorini.jpg" alt="город на скале с включенным ночным освещением и мельницами на заднем фоне" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Санторини самый романтичный остров в мире</h2>
@@ -39,7 +41,9 @@
             </figure>
 
             <figure class="card">
-                <img src="./images/Korsica.jpg" alt="Море на переднем плане и горы с домами и зеленными деревьями на заднем плане" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Korsica.jpg" alt="Море на переднем плане и горы с домами и зеленными деревьями на заднем плане" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Корсика</h2>
@@ -49,7 +53,9 @@
             </figure>
 
             <figure class="card">
-                <img src="./images/Sicilia.jpg" alt="Серпантин среди зеленых деревьев и море на заднем плане" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Sicilia.jpg" alt="Серпантин среди зеленых деревьев и море на заднем плане" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Сицилия</h2>
@@ -59,7 +65,9 @@
             </figure>
 
             <figure class="card">
-                <img src="./images/Madeira.jpg" alt="Лазурное море и береговая линия острова" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Madeira.jpg" alt="Лазурное море и береговая линия острова" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Мадейра</h2>
@@ -69,7 +77,9 @@
             </figure>
 
             <figure class="card">
-                <img src="./images/Malta.jpg" alt="Бухта с голубой водой и песчаные скалы" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Malta.jpg" alt="Бухта с голубой водой и песчаные скалы" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Мальта</h2>
@@ -79,7 +89,9 @@
             </figure>
 
             <figure class="card">
-                <img src="./images/Tenerife.jpg" alt="Пальмы на переднем плане и закат с городом на заднем плане" class="card__image">
+                <div class="card__image-wrapper">
+                    <img src="./images/Tenerife.jpg" alt="Пальмы на переднем плане и закат с городом на заднем плане" class="card__image">
+                </div>
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Тенерифе</h2>
@@ -98,8 +110,8 @@
         <div class="popup__container">
             <form class="popup__form" name="popupForm">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" name="name" placeholder="Ваше имя" required class="popup__input popup__input_nickname">
-                <input type="text" name="discription" placeholder="Ваша деятельность" required class="popup__input popup__input_discription">
+                <input type="text" name="name" placeholder="Ваше имя" required class="popup__input popup__input_value_nickname">
+                <input type="text" name="discription" placeholder="Ваша деятельность" required class="popup__input popup__input_value_discription">
                 <button type="submit" class="popup__submit">Сохранить</button>
             </form>
             <button type="button" aria-label="Закрыть" class="popup__close-button"></button>

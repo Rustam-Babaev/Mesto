@@ -4,7 +4,6 @@
         display: flex;
         flex-direction: column;
         width: 282px;
-        height: 361px;
         transition: 0.4s;
     }
     
