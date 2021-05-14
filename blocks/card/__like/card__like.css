@@ -6,7 +6,7 @@
     height: 19px;
     transition: 0.3s;
     border: none;
-    background-color: white;
+    background-color: transparent;
 }
 
 .card__like:hover {

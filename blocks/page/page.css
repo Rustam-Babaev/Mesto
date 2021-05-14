@@ -13,4 +13,7 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     background-color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

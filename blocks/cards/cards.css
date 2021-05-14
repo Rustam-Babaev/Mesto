@@ -3,7 +3,13 @@
     grid-template-columns: repeat( auto-fit, minmax(282px, 1fr));
     row-gap: 20px;
     column-gap: 17px;
-    width: calc(100% - 200px*2);
+    width: calc(100% - 15.62%*2);
+}
+
+@media screen and (max-width: 1279px) {
+    .cards {
+        width: 581px;
+    }
 }
 
 @media screen and (max-width: 995px) {

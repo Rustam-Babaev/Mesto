@@ -3,27 +3,22 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 47%;
-    position: relative;
-    top: -8px;
-    left: 1px;
     margin: 0 0 0 18px;
     box-sizing: border-box;
     border: 1px solid white;
-    background-color: black;
+    background-color: transparent;
     min-width: 24px;
     min-height: 24px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .profile__edit-button:hover {
     opacity: 0.6;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 995px) {
     .profile__edit-button {
-        top: -7px;
-        left: 0;
         min-width: 18px;
         min-height: 18px;
         margin: 0 0 0 10px;

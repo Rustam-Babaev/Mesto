@@ -1,11 +1,4 @@
 .profile__info-wrapper {
     display: flex;
-    align-items: flex-end;
-    max-width: 350px;
-}
-
-@media screen and (max-width:995px) {
-    .profile__info-wrapper {
-        max-width: 280px;
-    }
+    align-items: center;
 }

@@ -2,39 +2,34 @@ let popup = document.querySelector('.popup');
 let editProfile = document.querySelector('.profile__edit-button');
 let closeButton = popup.querySelector('.popup__close-button');
 let formElement = popup.querySelector('.popup__form');
-let editName = formElement.querySelector('.popup__nickname');
-let editDiscription = formElement.querySelector('.popup__discription');
+let editName = formElement.querySelector('.popup__input_nickname');
+let editDiscription = formElement.querySelector('.popup__input_discription');
 let profileName = document.querySelector('.profile__title');
 let profileDiscription = document.querySelector('.profile__subtitle');
 
 
-// Добавил изменение значка лайк
-let cards = document.querySelector('.cards');
-let card = cards.querySelectorAll('.card');
-for (item of card) {
-    let like = item.querySelector('.card__like');
-    like.addEventListener('click', () => like.classList.toggle('card__like_active'))
-}
-
-
-
-function ClosePopup() {
-    popup.classList.remove('popup_opened')
+function togglePopup() {
+    popup.classList.toggle('popup_opened')
 }
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = editName.value;
     profileDiscription.textContent = editDiscription.value;
-    ClosePopup()
+    togglePopup()
 }
 
-editProfile.addEventListener('click', () => {
-    popup.classList.add('popup_opened');
+function editInformation() {
+    togglePopup();
     editName.value = profileName.textContent;
     editDiscription.value = profileDiscription.textContent;
-});
+}
 
-closeButton.addEventListener('click', ClosePopup);
+//Добавил закрытие попапа при щелчке по оверлею, спасибо вебинару от 13.05
+popup.addEventListener('click', evt => { if (evt.target === evt.currentTarget) { togglePopup() } });
+
+editProfile.addEventListener('click', editInformation);
+
+closeButton.addEventListener('click', togglePopup);
 
 formElement.addEventListener('submit', formSubmitHandler);

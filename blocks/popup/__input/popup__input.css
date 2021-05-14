@@ -1,16 +1,16 @@
-.popup__discription {
+.popup__input {
     border: none;
     outline: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 28px 0 0;
+    padding: 0 0 10px 0;
     width: 100%;
     box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0 0 30px;
     font-size: 14px;
     line-height: 1.22;
     color: black;
-    padding: 0 0 10px 0;
 }
 
-.popup__discription:focus {
+.popup__input:focus {
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }

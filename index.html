@@ -20,11 +20,11 @@
             <div class="profile__info">
                 <div class="profile__info-wrapper">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button"></button>
+                    <button type="button" aria-label="Редактировать профиль" class="profile__edit-button"></button>
                 </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"></button>
+            <button type="button" aria-label="Добавить пост" class="profile__add-button"></button>
         </section>
 
         <section class="cards page__cards">
@@ -33,7 +33,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Санторини самый романтичный остров в мире</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -43,7 +43,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Корсика</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -53,7 +53,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Сицилия</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -63,7 +63,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Мадейра</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -73,7 +73,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Мальта</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -83,7 +83,7 @@
                 <figcaption class="card__footer">
                     <div class="card__footer-wrapper">
                         <h2 class="card__title">Тенерифе</h2>
-                        <button class="card__like"></button>
+                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
                     </div>
                 </figcaption>
             </figure>
@@ -96,14 +96,14 @@
 
     <div class="popup">
         <div class="popup__container">
-            <form class="popup__form">
+            <form class="popup__form" name="popupForm">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" class="popup__nickname">
-                <input type="text" class="popup__discription">
+                <input type="text" name="name" placeholder="Ваше имя" required class="popup__input popup__input_nickname">
+                <input type="text" name="discription" placeholder="Ваша деятельность" required class="popup__input popup__input_discription">
                 <button type="submit" class="popup__submit">Сохранить</button>
             </form>
+            <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
         </div>
-        <button class="popup__close-button"></button>
     </div>
 
     <script src="./js/popup.js"></script>
