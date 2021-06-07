@@ -28,85 +28,15 @@
         </section>
 
         <section class="cards page__cards">
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Santorini.jpg" alt="город на скале с включенным ночным освещением и мельницами на заднем фоне" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Санторини самый романтичный остров в мире</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
-
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Korsica.jpg" alt="Море на переднем плане и горы с домами и зеленными деревьями на заднем плане" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Корсика</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
-
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Sicilia.jpg" alt="Серпантин среди зеленых деревьев и море на заднем плане" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Сицилия</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
-
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Madeira.jpg" alt="Лазурное море и береговая линия острова" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Мадейра</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
-
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Malta.jpg" alt="Бухта с голубой водой и песчаные скалы" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Мальта</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
-
-            <figure class="card">
-                <div class="card__image-wrapper">
-                    <img src="./images/Tenerife.jpg" alt="Пальмы на переднем плане и закат с городом на заднем плане" class="card__image">
-                </div>
-                <figcaption class="card__footer">
-                    <div class="card__footer-wrapper">
-                        <h2 class="card__title">Тенерифе</h2>
-                        <button type="button" aria-label="Поставить лайк" class="card__like"></button>
-                    </div>
-                </figcaption>
-            </figure>
         </section>
+
     </main>
 
     <footer class="footer page__footer">
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_type_edit">
         <div class="popup__container">
             <form class="popup__form" name="popupForm">
                 <h2 class="popup__title">Редактировать профиль</h2>
@@ -118,7 +48,43 @@
         </div>
     </div>
 
+    <div class="popup popup_type_add">
+        <div class="popup__container">
+            <form class="popup__form" name="popupForm">
+                <h2 class="popup__title">Новое место</h2>
+                <input type="text" name="name" placeholder="Название" required class="popup__input popup__input_value_placeName">
+                <input type="text" name="discription" placeholder="Ссылка на картинку" required class="popup__input popup__input_value_link">
+                <button type="submit" class="popup__submit">Создать</button>
+            </form>
+            <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
+        </div>
+    </div>
+
+    <div class="popup popup_type_preview">
+        <div class="popup__container popup__container_type_preview">
+            <img src="#" alt="#" class="popup__image">
+            <h2 class="popup__title popup__title_type_preview">Title</h2>
+            <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
+        </div>
+    </div>
+
+    <template id="cardTemp">
+      <figure class="card">
+        <button type="button" aria-label="удалить" class="card__delete"></button>
+        <div class="card__image-wrapper">
+            <img src="" alt="" class="card__image">
+        </div>
+        <figcaption class="card__footer">
+            <div class="card__footer-wrapper">
+                <h2 class="card__title"></h2>
+                <button type="button" aria-label="Поставить лайк" class="card__like"></button>
+            </div>
+        </figcaption>
+      </figure>
+    </template>
+
     <script src="./js/popup.js"></script>
+
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 /* Добрый день
 
-Спасибо, совсем забыл о такой возможности позиционировании, теперь при увелечении контейнера кнопка ходит за ним.
 
 С уважением, Рустам Бабаев */
 
@@ -32,6 +31,7 @@
 @import url(../blocks/page/__cards/page__cards.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__delete/card__delete.css);
 @import url(../blocks/card/__image-wrapper/card__image-wrapper.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__footer/card__footer.css);
@@ -49,10 +49,14 @@
 /* popup */
 
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type/popup_type_preview.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_type/popup__container_type_preview.css);
+@import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__title/_type/popup__title_type_preview.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/_opened/popup_opened.css);

@@ -1,0 +1,6 @@
+.popup__container_type_preview {
+    position: relative;
+    min-width: 0;
+    color: white;
+    background-color: transparent;
+}

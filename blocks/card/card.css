@@ -5,8 +5,9 @@
         flex-direction: column;
         width: 282px;
         transition: 0.4s;
+        position: relative;
     }
-    
+
     .card:hover {
         transform: translateY(-5px);
     }
