@@ -2,9 +2,10 @@ const cardConteiner = document.querySelector('.cards')
 const cardTemplate = document.querySelector('#cardTemp');
 
 function createCard(name, link) {
-    let cardElement = cardTemplate.content.cloneNode(true);
-    cardElement.querySelector('.card__image').src = link;
-    cardElement.querySelector('.card__image').alt = name;
+    const cardElement = cardTemplate.content.cloneNode(true);
+    const cardElementImage = cardElement.querySelector('.card__image')
+    cardElementImage.src = link;
+    cardElementImage.alt = name;
     cardElement.querySelector('.card__title').textContent = name;
     return cardElement
 }
@@ -24,11 +25,6 @@ initialCards.forEach(item => {
 
 
 //Функции Открытие и закрытие  попапов
-
-function closestPopup(evt) {
-    return evt.target.closest('.popup')
-}
-
 function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
@@ -38,18 +34,14 @@ function closePopup(popup) {
 }
 
 function closePopupbutton(evt) {
-    if (evt.target.classList.contains('popup__close-button')) { closePopup(closestPopup(evt)) };
+    if (evt.target.classList.contains('popup__close-button')) { closePopup(evt.target.closest('.popup')) };
 }
 
 function closePopupOverlay(evt) {
-    if (evt.target === evt.currentTarget) { closePopup(closestPopup(evt)) };
+    if (evt.target === evt.currentTarget) { closePopup(evt.target.closest('.popup')) };
 }
 
-function openDifferentPopup(evt) {
-    if (evt.target === addButton) { openPopup(addPopup) } else
-    if (evt.target === editButton) { openPopup(editPopup) } else
-    if (evt.target.classList.contains('card__image')) { openPopup(previewPopup) }
-}
+
 
 //Коллекии попопов и кнопок закрытия
 const popups = document.querySelectorAll('.popup');
@@ -76,7 +68,7 @@ const editDiscription = editForm.querySelector('.popup__input_value_discription'
 
 //Функции для работы с editPopup
 function editProfile(evt) {
-    openDifferentPopup(evt);
+    openPopup(editPopup);
     editName.value = profileName.textContent;
     editDiscription.value = profileDiscription.textContent;
 }
@@ -85,7 +77,7 @@ function editFormSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = editName.value;
     profileDiscription.textContent = editDiscription.value;
-    closePopup(closestPopup(evt))
+    closePopup(editPopup)
 }
 
 //editPopup события
@@ -107,11 +99,12 @@ function addFormSubmitHandler(evt) {
     renderCard(createCard(placeName.value, link.value), cardConteiner, 'prepend');
     link.value = '';
     placeName.value = '';
-    closePopup(closestPopup(evt))
+    closePopup(addPopup)
 }
 
+
 //addPopup события
-addButton.addEventListener('click', openDifferentPopup);
+addButton.addEventListener('click', evt => openPopup(addPopup));
 addForm.addEventListener('submit', addFormSubmitHandler);
 
 
@@ -146,9 +139,9 @@ const previewTittle = previewPopup.querySelector('.popup__title');
 //Функция открытие и редактирования превью попапа
 function previewCard(evt) {
     if (evt.target.classList.contains('card__image')) {
-        openDifferentPopup(evt);
-        let card = evt.target.closest('.card');
-        let cardTittle = card.querySelector('.card__title');
+        openPopup(previewPopup);
+        const card = evt.target.closest('.card');
+        const cardTittle = card.querySelector('.card__title');
         previewImg.src = evt.target.src;
         previewImg.alt = evt.target.alt;
         previewTittle.textContent = cardTittle.textContent;
