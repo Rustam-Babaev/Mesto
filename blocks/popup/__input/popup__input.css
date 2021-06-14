@@ -12,7 +12,7 @@
 }
 
 .popup__input::placeholder {
-    color: #c4c4c4
+    color: #c4c4c4;
 }
 
 .popup__input:focus {
