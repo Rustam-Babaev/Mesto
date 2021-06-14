@@ -49,9 +49,15 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //Коллекция попапов проверяем на клик оверлея, прогоняем и находим ближайший родитель попап и закрываем его
 //Коллекция кнопок закрытия попапов, прогоняем и находим ближайший родитель попап и закрываем его
-popups.forEach(item => item.addEventListener('click', closePopupOverlay));
+popups.forEach(item => item.addEventListener('mousedown', closePopupOverlay));
 closeButtons.forEach(item => item.addEventListener('click', closePopupbutton));
 
+//Закрытия попапов на нажитие клавиши escape, была проблема с автоматической вставкой данных, которая вызывала срабатывания этого события, но событие было не в формате string и вызывало ошибку с toLowerCase. Решил проверкой по типу.
+document.addEventListener('keydown', evt => {
+    if (typeof evt.key === 'string') {
+        if (evt.key.toLowerCase() === 'escape') { popups.forEach(item => closePopup(item)) }
+    }
+})
 
 
 
@@ -97,8 +103,7 @@ const link = addForm.querySelector('.popup__input_value_link');
 function addFormSubmitHandler(evt) {
     evt.preventDefault();
     renderCard(createCard(placeName.value, link.value), cardConteiner, 'prepend');
-    link.value = '';
-    placeName.value = '';
+    addForm.reset();
     closePopup(addPopup)
 }
 
