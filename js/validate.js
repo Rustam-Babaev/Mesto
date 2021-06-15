@@ -8,18 +8,18 @@ function showInputError(error, input, errorMessage, errorClass, inputErrorClass)
 function hideInputError(error, input, errorClass, inputErrorClass) {
     error.classList.remove(errorClass);
     input.classList.remove(inputErrorClass);
+
 }
 
 
 
-//Функция проверки на валидность формы, немного изменил стандартные фразы на фразы из превью проектной работы
+//Функция проверки на валидность формы с изменениями стандартных фраз
 function isValid(form, input, errorClass, inputErrorClass) {
     const formError = form.querySelector(`.${input.id}-error`);
     if (!input.validity.valid) {
-        let validMessage = input.validationMessage;
-        if (validMessage === 'Введите URL.') { validMessage = 'Введите адрес сайта.' };
-        if (validMessage === 'Заполните это поле.') { validMessage = 'Вы пропустили это поле.' }
-        showInputError(formError, input, validMessage, errorClass, inputErrorClass);
+        if (input.validity.valueMissing) { input.setCustomValidity('Вы пропустили это поле.') } else
+        if (input.validity.typeMismatch) { input.setCustomValidity('Введите адрес сайта.') } else { input.setCustomValidity('') }
+        showInputError(formError, input, input.validationMessage, errorClass, inputErrorClass);
     } else {
         hideInputError(formError, input, errorClass, inputErrorClass);
     }
@@ -32,15 +32,20 @@ function hasInvalidInput(inputs) {
     return inputs.some(item => !item.validity.valid)
 }
 
+//Функции для управления состоянием Submit формы добавления поста, с параметром класса неактивной кнопки
+function addSubmitDisabled(submit, buttonDisabledClass) {
+    submit.classList.add(buttonDisabledClass);
+    submit.setAttribute('disabled', 'disabled')
+}
+
+function addSubmitActive(submit, buttonDisabledClass) {
+    submit.classList.remove(buttonDisabledClass);
+    submit.removeAttribute("disabled");
+}
+
 //Переключения состояния submit
-function toggleSubmit(inputs, submit) {
-    if (hasInvalidInput(inputs)) {
-        submit.classList.add('popup__submit_disable');
-        submit.setAttribute('disabled', 'disabled')
-    } else {
-        submit.classList.remove('popup__submit_disable');
-        submit.removeAttribute("disabled");
-    }
+function toggleSubmit(inputs, submit, buttonDisabledClass) {
+    hasInvalidInput(inputs) ? addSubmitDisabled(submit, buttonDisabledClass) : addSubmitActive(submit, buttonDisabledClass)
 }
 
 
@@ -53,12 +58,17 @@ function enableValidation(forms) {
         const submit = form.querySelector(obj.submitButtonSelector);
         const errorClass = obj.errorClass;
         const inputErrorClass = obj.inputErrorClass;
+        const buttonDisabledClass = obj.inactiveButtonClass;
 
         form.addEventListener('submit', evt => evt.preventDefault());
-        form.addEventListener('input', evt => isValid(form, evt.target, errorClass, inputErrorClass));
-        form.addEventListener('input', item => toggleSubmit(inputs, submit))
+        form.addEventListener('input', evt => {
+            isValid(form, evt.target, errorClass, inputErrorClass);
+            toggleSubmit(inputs, submit, buttonDisabledClass)
+        })
     })
 }
+
+
 
 //Вызов функции валидации форм с данными форм из другого js файла
 enableValidation(formsData);
