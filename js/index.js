@@ -24,6 +24,8 @@ const addForm = addPopup.querySelector('.popup__form');
 const addSubmitButton = addPopup.querySelector('.popup__submit');
 const placeName = addForm.querySelector('.popup__input_value_placeName');
 const link = addForm.querySelector('.popup__input_value_link');
+//Находим в массиве данных форм класс неактивной кнопки для попапа добавления карточки
+const addSubmitClassDisabled = formsData.find(item => item.formSelector === '.popup__form[name="popupEditForm"]').inactiveButtonClass;
 
 //previewImg элементы
 const previewPopup = document.querySelector('.popup_type_preview');
@@ -37,11 +39,14 @@ const previewTittle = previewPopup.querySelector('.popup__title');
 function createCard(cardData) {
     const cardElement = cardTemplate.content.cloneNode(true);
     const cardElementImage = cardElement.querySelector('.card__image');
-    const CardLike = cardElement.querySelector('.card__like');
+    const сardElementLike = cardElement.querySelector('.card__like');
+    const сardElementTrash = cardElement.querySelector('.card__delete');
     cardElementImage.src = cardData.link;
     cardElementImage.alt = cardData.name;
     cardElement.querySelector('.card__title').textContent = cardData.name;
-    CardLike.addEventListener('click', like);
+    сardElementLike.addEventListener('click', handleLikeClick);
+    сardElementTrash.addEventListener('click', handledeleteCard);
+    cardElementImage.addEventListener('click', handlepreviewCard);
     return cardElement
 }
 
@@ -51,8 +56,23 @@ function renderCard(card, container, position) {
 }
 
 //Функция смены состояния лайка
-function like(evt) {
+function handleLikeClick(evt) {
     evt.target.classList.toggle('card__like_active')
+}
+
+//Функия удаления карточек
+function handledeleteCard(evt) {
+    evt.target.closest('.card').remove()
+}
+
+//Функция открытие и редактирования превью попапа
+function handlepreviewCard(evt) {
+    openPopup(previewPopup);
+    const card = evt.target.closest('.card');
+    const cardTittle = card.querySelector('.card__title');
+    previewImg.src = evt.target.src;
+    previewImg.alt = evt.target.alt;
+    previewTittle.textContent = cardTittle.textContent;
 }
 
 //Функции Открытие и закрытие  попапов
@@ -76,26 +96,17 @@ function closePopupOverlay(evt) {
 }
 
 //Функция закрытия попапа при нажитие клавиши escape
-function closePopupEscape(key) {
-    if (typeof key.key === 'string') {
-        if (key.key.toLowerCase() === 'escape') { popups.forEach(item => closePopup(item)) }
+function closePopupEscape(event) {
+    if (event.key === 'Escape') {
+        closePopup(document.querySelector('.popup_opened'));
     }
 }
 
 //Функции для работы с editPopup.
-//Создал замыкание для первого открытия попапа редактировния, чтобы при закрытие попапа данные не перезаписывались, а оставались введеные
-const editProfile = function(evt) {
-    let count = 0;
-
-    function checkOneTimeEdit() {
-        openPopup(editPopup);
-        if (!count) {
-            editName.value = profileName.textContent;
-            editDescription.value = profileDescription.textContent;
-        }
-        count++
-    }
-    return checkOneTimeEdit
+function editProfile(evt) {
+    openPopup(editPopup);
+    editName.value = profileName.textContent;
+    editDescription.value = profileDescription.textContent;
 }
 
 function editFormSubmitHandler(evt) {
@@ -117,25 +128,6 @@ function addFormSubmitHandler(evt) {
     closePopup(addPopup);
 }
 
-//Удаление карточек
-function deleteCard(evt) {
-    if (evt.target.classList.contains('card__delete')) {
-        evt.target.closest('.card').remove();
-    };
-}
-
-//Функция открытие и редактирования превью попапа
-function previewCard(evt) {
-    if (evt.target.classList.contains('card__image')) {
-        openPopup(previewPopup);
-        const card = evt.target.closest('.card');
-        const cardTittle = card.querySelector('.card__title');
-        previewImg.src = evt.target.src;
-        previewImg.alt = evt.target.alt;
-        previewTittle.textContent = cardTittle.textContent;
-    }
-}
-
 
 
 
@@ -150,18 +142,13 @@ popups.forEach(item => item.addEventListener('mousedown', closePopupOverlay));
 closeButtons.forEach(item => item.addEventListener('click', closePopupbutton));
 
 //editPopup события
-editButton.addEventListener('click', editProfile());
+editButton.addEventListener('click', editProfile);
 editForm.addEventListener('submit', editFormSubmitHandler);
+
 
 //addPopup события
 addButton.addEventListener('click', evt => openPopup(addPopup));
 addForm.addEventListener('submit', evt => {
     addFormSubmitHandler(evt);
-    addSubmitDisabled(addSubmitButton)
+    addSubmitDisabled(addSubmitButton, addSubmitClassDisabled)
 });
-
-//Обработчик события удаления карточек
-cardContainer.addEventListener('click', deleteCard);
-
-//Обработчик события превью карточек
-cardContainer.addEventListener('click', previewCard);
