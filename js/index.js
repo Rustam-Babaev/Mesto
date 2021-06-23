@@ -1,6 +1,12 @@
+//Импорт данных карточек и параметров форм
+import { initialCards, formsData } from './Data.js';
+import { Card } from './Card.js';
+//Импорт класса для валидации форм и функция изменяющая состояние кнопки submit у формы
+import { FormValidator, addSubmitDisabled } from './FormValidator.js'
+
 //Шаблон и контейнер карточек
-const cardContainer = document.querySelector('.cards')
-const cardTemplate = document.querySelector('#cardTemp');
+const cardContainer = document.querySelector('.cards');
+const cardTemplateSelector = '#cardTemp';
 
 //Коллекии попопов и кнопок закрытия
 const popups = document.querySelectorAll('.popup');
@@ -24,56 +30,19 @@ const addForm = addPopup.querySelector('.popup__form');
 const addSubmitButton = addPopup.querySelector('.popup__submit');
 const placeName = addForm.querySelector('.popup__input_value_placeName');
 const link = addForm.querySelector('.popup__input_value_link');
+
 //Находим в массиве данных форм класс неактивной кнопки для попапа добавления карточки
 const addSubmitClassDisabled = formsData.find(item => item.formSelector === '.popup__form[name="popupEditForm"]').inactiveButtonClass;
 
-//previewImg элементы
-const previewPopup = document.querySelector('.popup_type_preview');
-const previewImg = previewPopup.querySelector('.popup__image');
-const previewTittle = previewPopup.querySelector('.popup__title');
 
 
 
-
-//Функции создания и отрисовки карточек
-function createCard(cardData) {
-    const cardElement = cardTemplate.content.cloneNode(true);
-    const cardElementImage = cardElement.querySelector('.card__image');
-    const сardElementLike = cardElement.querySelector('.card__like');
-    const сardElementTrash = cardElement.querySelector('.card__delete');
-    cardElementImage.src = cardData.link;
-    cardElementImage.alt = cardData.name;
-    cardElement.querySelector('.card__title').textContent = cardData.name;
-    сardElementLike.addEventListener('click', handleLikeClick);
-    сardElementTrash.addEventListener('click', handledeleteCard);
-    cardElementImage.addEventListener('click', handlepreviewCard);
-    return cardElement
-}
-
+//Функция для добавления карточки в общий контейнер с выбором расположения
 function renderCard(card, container, position) {
     if (position === 'append') { container.append(card) } else
     if (position === 'prepend') { container.prepend(card) }
 }
 
-//Функция смены состояния лайка
-function handleLikeClick(evt) {
-    evt.target.classList.toggle('card__like_active')
-}
-
-//Функия удаления карточек
-function handledeleteCard(evt) {
-    evt.target.closest('.card').remove()
-}
-
-//Функция открытие и редактирования превью попапа
-function handlepreviewCard(evt) {
-    openPopup(previewPopup);
-    const card = evt.target.closest('.card');
-    const cardTittle = card.querySelector('.card__title');
-    previewImg.src = evt.target.src;
-    previewImg.alt = evt.target.alt;
-    previewTittle.textContent = cardTittle.textContent;
-}
 
 //Функции Открытие и закрытие  попапов
 function openPopup(popup) {
@@ -123,7 +92,9 @@ function addFormSubmitHandler(evt) {
         link: link.value
     }
     evt.preventDefault();
-    renderCard(createCard(newCard), cardContainer, 'prepend');
+    const card = new Card(newCard, '#cardTemp');
+    const cardElement = card.createCard();
+    renderCard(cardElement, cardContainer, 'prepend');
     addForm.reset();
     closePopup(addPopup);
 }
@@ -131,9 +102,17 @@ function addFormSubmitHandler(evt) {
 
 
 
-//Добавления на страницу списка постов из массива данных
+//Проход по массиву предоставленных данных и создания карточек с помощью класса Card с последующим добавленим на страницу
 initialCards.forEach(item => {
-    renderCard(createCard(item), cardContainer, 'append');
+    const card = new Card(item, cardTemplateSelector);
+    const cardElement = card.createCard();
+    renderCard(cardElement, cardContainer, 'append');
+})
+
+//Проход по массиву данных форм и включение валидации каждой формы с помощью класса FormValidator
+formsData.forEach(item => {
+    const validForm = new FormValidator(item, item.formSelector);
+    validForm.enableValidation()
 })
 
 //Коллекция попапов проверяем на клик оверлея, прогоняем и находим ближайший родитель попап и закрываем его
@@ -152,3 +131,6 @@ addForm.addEventListener('submit', evt => {
     addFormSubmitHandler(evt);
     addSubmitDisabled(addSubmitButton, addSubmitClassDisabled)
 });
+
+//Экспорт функции открытия попапа
+export { openPopup }
