@@ -2,7 +2,7 @@
 import { initialCards, formsData } from './Data.js';
 import { Card } from './Card.js';
 //Импорт класса для валидации форм и функция изменяющая состояние кнопки submit у формы
-import { FormValidator, addSubmitDisabled } from './FormValidator.js'
+import { FormValidator } from './FormValidator.js'
 
 //Шаблон и контейнер карточек
 const cardContainer = document.querySelector('.cards');
@@ -34,6 +34,11 @@ const link = addForm.querySelector('.popup__input_value_link');
 //Находим в массиве данных форм класс неактивной кнопки для попапа добавления карточки
 const addSubmitClassDisabled = formsData.find(item => item.formSelector === '.popup__form[name="popupEditForm"]').inactiveButtonClass;
 
+//
+const validFormEdit = new FormValidator(formsData[0], formsData[0].formSelector);
+const validFormAdd = new FormValidator(formsData[1], formsData[1].formSelector);
+
+
 
 
 
@@ -61,7 +66,7 @@ function closePopupbutton(evt) {
 }
 
 function closePopupOverlay(evt) {
-    if (evt.target === evt.currentTarget) { closePopup(evt.target.closest('.popup')) };
+    if (evt.target === evt.currentTarget) { closePopup(evt.target) };
 }
 
 //Функция закрытия попапа при нажитие клавиши escape
@@ -109,11 +114,13 @@ initialCards.forEach(item => {
     renderCard(cardElement, cardContainer, 'append');
 })
 
-//Проход по массиву данных форм и включение валидации каждой формы с помощью класса FormValidator
-formsData.forEach(item => {
-    const validForm = new FormValidator(item, item.formSelector);
-    validForm.enableValidation()
-})
+
+//Вызов метода валидации форм
+validFormEdit.enableValidation();
+validFormAdd.enableValidation();
+
+
+
 
 //Коллекция попапов проверяем на клик оверлея, прогоняем и находим ближайший родитель попап и закрываем его
 //Коллекция кнопок закрытия попапов, прогоняем и находим ближайший родитель попап и закрываем его
@@ -129,8 +136,9 @@ editForm.addEventListener('submit', editFormSubmitHandler);
 addButton.addEventListener('click', evt => openPopup(addPopup));
 addForm.addEventListener('submit', evt => {
     addFormSubmitHandler(evt);
-    addSubmitDisabled(addSubmitButton, addSubmitClassDisabled)
+    validFormAdd.addSubmitDisabled()
 });
+
 
 //Экспорт функции открытия попапа
 export { openPopup }

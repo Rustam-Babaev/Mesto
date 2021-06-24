@@ -41,8 +41,8 @@ export class Card {
     //Метод для прикрепления обработчиков событий при создании карточек
     _setEventListeners() {
         this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeClick(evt));
-        this._element.querySelector('.card__delete').addEventListener('click', (evt) => this._handledeleteCard(evt));
         this._element.querySelector('.card__image').addEventListener('click', (evt) => this._handlepreviewCard(evt));
+        this._element.querySelector('.card__delete').addEventListener('click', () => this._handledeleteCard());
     }
 
     //Методы класса для обработчика событий
@@ -50,9 +50,10 @@ export class Card {
         evt.target.classList.toggle('card__like_active')
     }
 
-    //Функия удаления карточек
-    _handledeleteCard(evt) {
-        evt.target.closest('.card').remove()
+    //Функия удаления карточек. (Предыдущий ревьюер сказал что затирать значения лучше с помощью пустой строки чем null, верно ли это утверждение?)
+    _handledeleteCard() {
+        this._element.remove();
+        this._element = '';
     }
 
     //Функция открытие и редактирования превью попапа
