@@ -1,5 +1,5 @@
 //Импорт функции открытия превью попапа
-import { openPopup } from './index.js'
+import { openPopup } from '../src/index.js'
 
 //Переменные для превью попапа
 const previewPopup = document.querySelector('.popup_type_preview');

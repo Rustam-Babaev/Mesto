@@ -1,26 +1,40 @@
+const santoriniImage = new URL('../images/Santorini.jpg',
+    import.meta.url);
+const korsicaImage = new URL('../images/Korsica.jpg',
+    import.meta.url);
+const siciliaImage = new URL('../images/Sicilia.jpg',
+    import.meta.url);
+const madeiraImage = new URL('../images/Madeira.jpg',
+    import.meta.url);
+const maltaImage = new URL('../images/Malta.jpg',
+    import.meta.url);
+const tenerifeImage = new URL('../images/Tenerife.jpg',
+    import.meta.url);
+
+
 const initialCards = [{
         name: 'Санторини самый',
-        link: './images/Santorini.jpg'
+        link: santoriniImage
     },
     {
         name: 'Корсика',
-        link: './images/Korsica.jpg'
+        link: korsicaImage
     },
     {
         name: 'Сицилия',
-        link: './images/Sicilia.jpg'
+        link: siciliaImage
     },
     {
         name: 'Мадейра',
-        link: './images/Madeira.jpg'
+        link: madeiraImage
     },
     {
         name: 'Мальта',
-        link: './images/Malta.jpg'
+        link: maltaImage
     },
     {
         name: 'Тенерифе',
-        link: './images/Tenerife.jpg'
+        link: tenerifeImage
     }
 ];
 

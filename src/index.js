@@ -1,8 +1,9 @@
 //Импорт данных карточек и параметров форм
-import { initialCards, formsData } from './Data.js';
-import { Card } from './Card.js';
+import '../pages/index.css';
+import { initialCards, formsData } from '../js/Data';
+import { Card } from '../js/Card.js';
 //Импорт класса для валидации форм и функция изменяющая состояние кнопки submit у формы
-import { FormValidator } from './FormValidator.js'
+import { FormValidator } from '../js/FormValidator.js'
 
 //Шаблон и контейнер карточек
 const cardContainer = document.querySelector('.cards');

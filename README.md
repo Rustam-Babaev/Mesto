@@ -25,6 +25,7 @@
     * DOM
     * Events
 * Git
+* Webpack
 * Изоляция стилей БЭМ
 * Файловая структура Nested
 * Responsive design
