@@ -4,10 +4,10 @@ export default class Popup {
     }
 
     open() {
-
+        popup.classList.add('popup_opened');
     }
     close() {
-
+        popup.classList.remove('popup_opened');
     }
 
     _handleEscClose() {

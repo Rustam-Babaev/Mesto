@@ -3,10 +3,11 @@ import '../pages/index.css';
 import { initialCards, formsData } from '../js/Data';
 import { Card } from '../js/Card.js';
 //Импорт класса для валидации форм и функция изменяющая состояние кнопки submit у формы
-import { FormValidator } from '../js/FormValidator.js'
+import { FormValidator } from '../js/FormValidator.js';
+import Section from '../js/Section.js'
 
 //Шаблон и контейнер карточек
-const cardContainer = document.querySelector('.cards');
+const cardContainerSelector = '.cards';
 const cardTemplateSelector = '#cardTemp';
 
 //Коллекии попопов и кнопок закрытия
@@ -39,15 +40,6 @@ const addSubmitClassDisabled = formsData.find(item => item.formSelector === '.po
 const validFormEdit = new FormValidator(formsData[0], formsData[0].formSelector);
 const validFormAdd = new FormValidator(formsData[1], formsData[1].formSelector);
 
-
-
-
-
-//Функция для добавления карточки в общий контейнер с выбором расположения
-function renderCard(card, container, position) {
-    if (position === 'append') { container.append(card) } else
-    if (position === 'prepend') { container.prepend(card) }
-}
 
 
 //Функции Открытие и закрытие  попапов
@@ -100,20 +92,24 @@ function addFormSubmitHandler(evt) {
     evt.preventDefault();
     const card = new Card(newCard, '#cardTemp');
     const cardElement = card.createCard();
-    renderCard(cardElement, cardContainer, 'prepend');
+    cardsList.addItem(cardElement);
     addForm.reset();
     closePopup(addPopup);
 }
 
 
 
+//Инициализация класса Section и отрисовка карточек на странице
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card(item, cardTemplateSelector);
+        const cardElement = card.createCard();
+        cardsList.addItem(cardElement)
+    }
+}, cardContainerSelector);
 
-//Проход по массиву предоставленных данных и создания карточек с помощью класса Card с последующим добавленим на страницу
-initialCards.forEach(item => {
-    const card = new Card(item, cardTemplateSelector);
-    const cardElement = card.createCard();
-    renderCard(cardElement, cardContainer, 'append');
-})
+cardsList.renderItems();
 
 
 //Вызов метода валидации форм
