@@ -13,28 +13,28 @@ const tenerifeImage = new URL('../images/Tenerife.jpg',
 
 
 const initialCards = [{
-        name: 'Санторини самый',
-        link: santoriniImage
+        namePost: 'Санторини самый',
+        linkPost: santoriniImage
     },
     {
-        name: 'Корсика',
-        link: korsicaImage
+        namePost: 'Корсика',
+        linkPost: korsicaImage
     },
     {
-        name: 'Сицилия',
-        link: siciliaImage
+        namePost: 'Сицилия',
+        linkPost: siciliaImage
     },
     {
-        name: 'Мадейра',
-        link: madeiraImage
+        namePost: 'Мадейра',
+        linkPost: madeiraImage
     },
     {
-        name: 'Мальта',
-        link: maltaImage
+        namePost: 'Мальта',
+        linkPost: maltaImage
     },
     {
-        name: 'Тенерифе',
-        link: tenerifeImage
+        namePost: 'Тенерифе',
+        linkPost: tenerifeImage
     }
 ];
 

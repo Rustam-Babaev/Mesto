@@ -39,10 +39,10 @@
         <div class="popup__container">
             <form class="popup__form" name="popupEditForm" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" name="nameProfile" id="nameProfile-input" placeholder="Ваше имя" minlength="2" maxlength="40" required class="popup__input popup__input_value_nickname">
-                <span class='popup__input-error nameProfile-input-error'></span>
-                <input type="text" name="descriptionProfile" id="descriptionProfile-input" placeholder="Ваша деятельность" minlength="2" maxlength="200" required class="popup__input popup__input_value_description">
-                <span class='popup__input-error descriptionProfile-input-error'></span>
+                <input type="text" name="userName" id="userName-input" placeholder="Ваше имя" minlength="2" maxlength="40" required class="popup__input popup__input_value_nickname">
+                <span class='popup__input-error userName-input-error'></span>
+                <input type="text" name="userInfo" id="userInfo-input" placeholder="Ваша деятельность" minlength="2" maxlength="200" required class="popup__input popup__input_value_description">
+                <span class='popup__input-error userInfo-input-error'></span>
                 <button type="submit" class="popup__submit">Сохранить</button>
             </form>
             <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
@@ -55,8 +55,8 @@
                 <h2 class="popup__title">Новое место</h2>
                 <input type="text" name="namePost" id="namePost-input" placeholder="Название" minlength="2" maxlength="30" required class="popup__input popup__input_value_placeName">
                 <span class='popup__input-error namePost-input-error'></span>
-                <input type="url" name="descriptionPost" id="descriptionPost-input" placeholder="Ссылка на картинку" required class="popup__input popup__input_value_link">
-                <span class='popup__input-error descriptionPost-input-error'></span>
+                <input type="url" name="linkPost" id="linkPost-input" placeholder="Ссылка на картинку" required class="popup__input popup__input_value_link">
+                <span class='popup__input-error linkPost-input-error'></span>
                 <button type="submit" class="popup__submit popup__submit_disable" disabled="disabled">Создать</button>
             </form>
             <button type="button" aria-label="Закрыть" class="popup__close-button"></button>

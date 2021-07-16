@@ -1,18 +1,9 @@
-//Импорт функции открытия превью попапа
-import { openPopup } from '../src/index.js'
+export default class Card {
 
-//Переменные для превью попапа
-const previewPopup = document.querySelector('.popup_type_preview');
-const previewImg = previewPopup.querySelector('.popup__image');
-const previewTittle = previewPopup.querySelector('.popup__title');
-
-
-//Экспорт класса при обьявлении
-export class Card {
-
-    constructor(cardData, cardTemplate) {
+    constructor({ cardData, cardTemplate, handleCardClick }) {
         this._cardData = cardData;
         this._cardTemplate = cardTemplate;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -29,11 +20,12 @@ export class Card {
     createCard() {
         this._element = this._getTemplate();
         const _cardElementImage = this._element.querySelector('.card__image');
-        _cardElementImage.src = this._cardData.link;
-        _cardElementImage.alt = this._cardData.name;
-        this._element.querySelector('.card__title').textContent = this._cardData.name;
+        _cardElementImage.src = this._cardData.linkPost;
+        _cardElementImage.alt = this._cardData.namePost;
+        this._element.querySelector('.card__title').textContent = this._cardData.namePost;
 
         this._setEventListeners();
+        this._handleCardClick(_cardElementImage);
 
         return this._element
     }
@@ -41,7 +33,6 @@ export class Card {
     //Метод для прикрепления обработчиков событий при создании карточек
     _setEventListeners() {
         this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeClick(evt));
-        this._element.querySelector('.card__image').addEventListener('click', (evt) => this._handlepreviewCard(evt));
         this._element.querySelector('.card__delete').addEventListener('click', () => this._handledeleteCard());
     }
 
@@ -56,14 +47,5 @@ export class Card {
         this._element = '';
     }
 
-    //Функция открытие и редактирования превью попапа
-    _handlepreviewCard(evt) {
-        openPopup(previewPopup);
-        const _card = evt.target.closest('.card');
-        const _cardTittle = _card.querySelector('.card__title');
-        previewImg.src = evt.target.src;
-        previewImg.alt = evt.target.alt;
-        previewTittle.textContent = _cardTittle.textContent;
-    }
 
 }

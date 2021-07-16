@@ -1,8 +1,4 @@
-//Был не уверен в предыдущем решении, но было написанно что нужно иметь только один публичный метод у класса и это ввело в ступор.
-//Убрал проброс параметров, оставил только
-
-
-class FormValidator {
+export default class FormValidator {
 
     constructor(formsData, formElement) {
         this._formsData = formsData;
@@ -69,7 +65,10 @@ class FormValidator {
         this._inputErrorClass = this._formsData.inputErrorClass;
         this._buttonDisabledClass = this._formsData.inactiveButtonClass;
 
-        this._form.addEventListener('submit', evt => evt.preventDefault());
+        this._form.addEventListener('submit', evt => {
+            evt.preventDefault();
+            this.addSubmitDisabled()
+        });
         this._form.addEventListener('input', evt => {
             this._isValid(evt.target);
             this._toggleSubmit()
@@ -77,5 +76,3 @@ class FormValidator {
     }
 
 }
-
-export { FormValidator }

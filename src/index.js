@@ -1,141 +1,104 @@
-//Импорт данных карточек и параметров форм
+//Импорт данных и всех классов
 import '../pages/index.css';
 import { initialCards, formsData } from '../js/Data';
-import { Card } from '../js/Card.js';
-//Импорт класса для валидации форм и функция изменяющая состояние кнопки submit у формы
-import { FormValidator } from '../js/FormValidator.js';
-import Section from '../js/Section.js'
+import Card from '../js/Card.js';
+import FormValidator from '../js/FormValidator.js';
+import Section from '../js/Section.js';
+import PopupWithForm from '../js/PopupWithForm.js';
+import PopupWithImage from '../js/PopupWithImage.js';
+import UserInfo from '../js/UserInfo.js';
 
 //Шаблон и контейнер карточек
 const cardContainerSelector = '.cards';
 const cardTemplateSelector = '#cardTemp';
 
-//Коллекии попопов и кнопок закрытия
-const popups = document.querySelectorAll('.popup');
-const closeButtons = document.querySelectorAll('.popup__close-button');
-
-//Профайл пользователя
-const profileName = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__subtitle');
-
 // editPopup элементы
 const editPopup = document.querySelector('.popup_type_edit');
+const editPopupName = editPopup.querySelector('#userName-input');
+const editPopupInfo = editPopup.querySelector('#userInfo-input');
 const editButton = document.querySelector('.profile__edit-button');
-const editForm = editPopup.querySelector('.popup__form');
-const editName = editForm.querySelector('.popup__input_value_nickname');
-const editDescription = editForm.querySelector('.popup__input_value_description');
 
 // addPopup элементы
-const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
-const addForm = addPopup.querySelector('.popup__form');
-const addSubmitButton = addPopup.querySelector('.popup__submit');
-const placeName = addForm.querySelector('.popup__input_value_placeName');
-const link = addForm.querySelector('.popup__input_value_link');
 
-//Находим в массиве данных форм класс неактивной кнопки для попапа добавления карточки
-const addSubmitClassDisabled = formsData.find(item => item.formSelector === '.popup__form[name="popupEditForm"]').inactiveButtonClass;
-
-//
+//Инициализация класса FormValidator
 const validFormEdit = new FormValidator(formsData[0], formsData[0].formSelector);
 const validFormAdd = new FormValidator(formsData[1], formsData[1].formSelector);
 
-
-
-//Функции Открытие и закрытие  попапов
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupEscape);
-
-}
-
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupEscape);
-}
-
-function closePopupbutton(evt) {
-    if (evt.target.classList.contains('popup__close-button')) { closePopup(evt.target.closest('.popup')) };
-}
-
-function closePopupOverlay(evt) {
-    if (evt.target === evt.currentTarget) { closePopup(evt.target) };
-}
-
-//Функция закрытия попапа при нажитие клавиши escape
-function closePopupEscape(event) {
-    if (event.key === 'Escape') {
-        closePopup(document.querySelector('.popup_opened'));
-    }
-}
-
-//Функции для работы с editPopup.
-function editProfile(evt) {
-    openPopup(editPopup);
-    editName.value = profileName.textContent;
-    editDescription.value = profileDescription.textContent;
-}
-
-function editFormSubmitHandler(evt) {
-    evt.preventDefault();
-    profileName.textContent = editName.value;
-    profileDescription.textContent = editDescription.value;
-    closePopup(editPopup)
-}
-
-//Функция добавление карточки при нажатии submit и стирание формы с последующим закрытия попапа
-function addFormSubmitHandler(evt) {
-    const newCard = {
-        name: placeName.value,
-        link: link.value
-    }
-    evt.preventDefault();
-    const card = new Card(newCard, '#cardTemp');
-    const cardElement = card.createCard();
-    cardsList.addItem(cardElement);
-    addForm.reset();
-    closePopup(addPopup);
-}
+//Инициализация класса превью поста
+const previewPopup = new PopupWithImage('.popup_type_preview');
+previewPopup.setEventListeners();
 
 
 
 //Инициализация класса Section и отрисовка карточек на странице
+//Также здесь передаюем функцию handleCardClick со слабой связью для показа превью поста
 const cardsList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, cardTemplateSelector);
+        const card = new Card({
+            cardData: item,
+            cardTemplate: cardTemplateSelector,
+            handleCardClick: (image) => {
+                image.addEventListener('click', (evt) => previewPopup.open(evt))
+            }
+        });
         const cardElement = card.createCard();
-        cardsList.addItem(cardElement)
+        cardsList.addItem(cardElement, 'append')
     }
 }, cardContainerSelector);
 
 cardsList.renderItems();
 
 
-//Вызов метода валидации форм
-validFormEdit.enableValidation();
-validFormAdd.enableValidation();
+
+
+const addform = new PopupWithForm({
+    popupSelector: '.popup_type_add',
+    handleFormSubmit: (formData) => {
+        const card = new Card({
+            cardData: formData,
+            cardTemplate: cardTemplateSelector,
+            handleCardClick: (image) => {
+                image.addEventListener('click', (evt) => previewPopup.open(evt))
+            }
+        });
+        const cardElement = card.createCard();
+        cardsList.addItem(cardElement, 'prepend')
+    }
+});
+
+addform.setEventListeners();
+addButton.addEventListener('click', () => addform.open());
 
 
 
 
-//Коллекция попапов проверяем на клик оверлея, прогоняем и находим ближайший родитель попап и закрываем его
-//Коллекция кнопок закрытия попапов, прогоняем и находим ближайший родитель попап и закрываем его
-popups.forEach(item => item.addEventListener('mousedown', closePopupOverlay));
-closeButtons.forEach(item => item.addEventListener('click', closePopupbutton));
+//Инициализация классов UserInfo и PopupWithForm
+const userInfo = new UserInfo({
+    userNameSelector: '.profile__title',
+    userInfoSelector: '.profile__subtitle'
+})
 
-//editPopup события
-editButton.addEventListener('click', editProfile);
-editForm.addEventListener('submit', editFormSubmitHandler);
+const editForm = new PopupWithForm({
+    popupSelector: '.popup_type_edit',
+    handleFormSubmit: (formData) => {
+        userInfo.setUserInfo(formData.userName, formData.userInfo);
+    }
+})
 
+editForm.setEventListeners();
 
-//addPopup события
-addButton.addEventListener('click', evt => openPopup(addPopup));
-addForm.addEventListener('submit', evt => {
-    addFormSubmitHandler(evt);
-    validFormAdd.addSubmitDisabled()
+editButton.addEventListener('click', () => {
+    editForm.open();
+    const userData = userInfo.getUserInfo();
+    editPopupName.value = userData.userName;
+    editPopupInfo.value = userData.userInfo;
 });
 
 
-//Экспорт функции открытия попапа
-export { openPopup }
+
+
+//Вызов метода валидации форм
+validFormEdit.enableValidation();
+validFormAdd.enableValidation();
