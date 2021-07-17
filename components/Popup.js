@@ -17,13 +17,12 @@ export default class Popup {
             this.close()
         }
     }
-    _handleOverlayClose(evt) {
-        if (evt.target === evt.currentTarget) { this.close() };
-    }
-
 
     setEventListeners() {
-        this._popup.querySelector('.popup__close-button').addEventListener('click', () => { this.close() });
-        this._popup.addEventListener('mousedown', (evt) => this._handleOverlayClose(evt));
+        this._popup.addEventListener('mousedown', (evt) => {
+            if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+                this.close();
+            }
+        });
     }
 }

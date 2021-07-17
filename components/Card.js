@@ -25,7 +25,6 @@ export default class Card {
         this._element.querySelector('.card__title').textContent = this._cardData.namePost;
 
         this._setEventListeners();
-        this._handleCardClick(_cardElementImage);
 
         return this._element
     }
@@ -34,6 +33,7 @@ export default class Card {
     _setEventListeners() {
         this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeClick(evt));
         this._element.querySelector('.card__delete').addEventListener('click', () => this._handledeleteCard());
+        this._element.querySelector('.card__image').addEventListener('click', (evt) => this._handleCardClick(evt));
     }
 
     //Методы класса для обработчика событий
@@ -41,10 +41,10 @@ export default class Card {
         evt.target.classList.toggle('card__like_active')
     }
 
-    //Функия удаления карточек. (Предыдущий ревьюер сказал что затирать значения лучше с помощью пустой строки чем null, верно ли это утверждение?)
+    //Функия удаления карточек
     _handledeleteCard() {
         this._element.remove();
-        this._element = '';
+        this._element = null;
     }
 
 

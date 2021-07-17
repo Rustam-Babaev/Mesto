@@ -39,7 +39,8 @@ const initialCards = [{
 ];
 
 
-const formsData = [{
+const formsData = {
+    popupEditForm: {
         formSelector: '.popup__form[name="popupEditForm"]',
         inputSelector: '.popup__input',
         submitButtonSelector: '.popup__submit',
@@ -47,7 +48,7 @@ const formsData = [{
         inputErrorClass: 'popup__input_type_error',
         errorClass: 'popup__input-error_visible'
     },
-    {
+    popupAddForm: {
         formSelector: '.popup__form[name="popupAddForm"]',
         inputSelector: '.popup__input',
         submitButtonSelector: '.popup__submit',
@@ -55,6 +56,6 @@ const formsData = [{
         inputErrorClass: 'popup__input_type_error',
         errorClass: 'popup__input-error_visible'
     }
-]
+}
 
 export { initialCards, formsData }

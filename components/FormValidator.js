@@ -1,8 +1,9 @@
 export default class FormValidator {
 
-    constructor(formsData, formElement) {
+    constructor(formsData, formElement, openButton) {
         this._formsData = formsData;
-        this._formElement = formElement
+        this._formElement = formElement;
+        this._openButton = openButton
     }
 
     //Метод для отображения ошибок и их скрытие
@@ -35,8 +36,6 @@ export default class FormValidator {
         this._input = input;
         this._formError = this._form.querySelector(`.${this._input.id}-error`);
         if (!this._input.validity.valid) {
-            if (this._input.validity.valueMissing) { this._input.setCustomValidity('Вы пропустили это поле.') } else
-            if (this._input.validity.typeMismatch) { this._input.setCustomValidity('Введите адрес сайта.') } else { input.setCustomValidity('') }
             this._showInputError();
         } else {
             this._hideInputError();
@@ -72,6 +71,9 @@ export default class FormValidator {
         this._form.addEventListener('input', evt => {
             this._isValid(evt.target);
             this._toggleSubmit()
+        })
+        this._openButton.addEventListener('click', evt => {
+            this._hideInputError()
         })
     }
 

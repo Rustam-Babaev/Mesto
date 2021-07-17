@@ -1,12 +1,12 @@
 //Импорт данных и всех классов
 import '../pages/index.css';
-import { initialCards, formsData } from '../js/Data';
-import Card from '../js/Card.js';
-import FormValidator from '../js/FormValidator.js';
-import Section from '../js/Section.js';
-import PopupWithForm from '../js/PopupWithForm.js';
-import PopupWithImage from '../js/PopupWithImage.js';
-import UserInfo from '../js/UserInfo.js';
+import { initialCards, formsData } from '../utils/constants';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 //Шаблон и контейнер карточек
 const cardContainerSelector = '.cards';
@@ -22,8 +22,8 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
 //Инициализация класса FormValidator
-const validFormEdit = new FormValidator(formsData[0], formsData[0].formSelector);
-const validFormAdd = new FormValidator(formsData[1], formsData[1].formSelector);
+const validFormEdit = new FormValidator(formsData.popupEditForm, formsData.popupEditForm.formSelector, editButton);
+const validFormAdd = new FormValidator(formsData.popupAddForm, formsData.popupAddForm.formSelector, addButton);
 
 //Инициализация класса превью поста
 const previewPopup = new PopupWithImage('.popup_type_preview');
@@ -31,20 +31,26 @@ previewPopup.setEventListeners();
 
 
 
-//Инициализация класса Section и отрисовка карточек на странице
+
+//Функция генерирования карточки
 //Также здесь передаюем функцию handleCardClick со слабой связью для показа превью поста
+function cardGenerate(item) {
+    const card = new Card({
+        cardData: item,
+        cardTemplate: cardTemplateSelector,
+        handleCardClick: (evt) => previewPopup.open(evt)
+    });
+    return card.createCard();
+}
+
+
+
+
+//Инициализация класса Section и отрисовка карточек на странице
 const cardsList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card({
-            cardData: item,
-            cardTemplate: cardTemplateSelector,
-            handleCardClick: (image) => {
-                image.addEventListener('click', (evt) => previewPopup.open(evt))
-            }
-        });
-        const cardElement = card.createCard();
-        cardsList.addItem(cardElement, 'append')
+        cardsList.addItem(cardGenerate(item), 'append')
     }
 }, cardContainerSelector);
 
@@ -56,15 +62,7 @@ cardsList.renderItems();
 const addform = new PopupWithForm({
     popupSelector: '.popup_type_add',
     handleFormSubmit: (formData) => {
-        const card = new Card({
-            cardData: formData,
-            cardTemplate: cardTemplateSelector,
-            handleCardClick: (image) => {
-                image.addEventListener('click', (evt) => previewPopup.open(evt))
-            }
-        });
-        const cardElement = card.createCard();
-        cardsList.addItem(cardElement, 'prepend')
+        cardsList.addItem(cardGenerate(formData), 'prepend')
     }
 });
 

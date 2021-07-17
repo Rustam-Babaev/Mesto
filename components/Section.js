@@ -6,9 +6,13 @@ export default class Section {
     }
 
     addItem(element, position) {
-        if (position === 'append') { this._container.append(element) } else
-        if (position === 'prepend') { this._container.prepend(element) }
+        if (position === 'append') {
+            this._container.append(element)
+        } else if (position === 'prepend') {
+            this._container.prepend(element)
+        }
     }
+
 
     renderItems() {
         this._initialArray.forEach(item => {
