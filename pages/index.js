@@ -1,6 +1,15 @@
 //Импорт данных и всех классов
 import '../pages/index.css';
-import { initialCards, formsData } from '../utils/constants';
+import {
+    initialCards,
+    formsData,
+    cardContainerSelector,
+    cardTemplateSelector,
+    editPopupName,
+    editPopupInfo,
+    editButton,
+    addButton
+} from '../utils/constants';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -8,18 +17,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
-//Шаблон и контейнер карточек
-const cardContainerSelector = '.cards';
-const cardTemplateSelector = '#cardTemp';
 
-// editPopup элементы
-const editPopup = document.querySelector('.popup_type_edit');
-const editPopupName = editPopup.querySelector('#userName-input');
-const editPopupInfo = editPopup.querySelector('#userInfo-input');
-const editButton = document.querySelector('.profile__edit-button');
-
-// addPopup элементы
-const addButton = document.querySelector('.profile__add-button');
 
 //Инициализация класса FormValidator
 const validFormEdit = new FormValidator(formsData.popupEditForm, formsData.popupEditForm.formSelector, editButton);

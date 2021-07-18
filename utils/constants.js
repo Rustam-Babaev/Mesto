@@ -58,4 +58,17 @@ const formsData = {
     }
 }
 
-export { initialCards, formsData }
+//Шаблон и контейнер карточек
+const cardContainerSelector = '.cards';
+const cardTemplateSelector = '#cardTemp';
+
+// editPopup элементы
+const editPopup = document.querySelector('.popup_type_edit');
+const editPopupName = editPopup.querySelector('#userName-input');
+const editPopupInfo = editPopup.querySelector('#userInfo-input');
+const editButton = document.querySelector('.profile__edit-button');
+
+// addPopup элементы
+const addButton = document.querySelector('.profile__add-button');
+
+export { initialCards, formsData, cardContainerSelector, cardTemplateSelector, editPopupName, editPopupInfo, editButton, addButton }
