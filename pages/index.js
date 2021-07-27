@@ -34,6 +34,9 @@ function renderLoading(isLoading, popupSelector) {
         case '.popup_type_edit':
             submit.textContent = 'Сохранить';
             break;
+        case '.popup_type_edit-avatar':
+            submit.textContent = 'Сохранить';
+            break;
         case '.popup_type_confirmation':
             submit.textContent = 'Да';
             break;
@@ -151,7 +154,7 @@ const editForm = new PopupWithForm({
 const avatarPopup = new PopupWithForm({
     popupSelector: '.popup_type_edit-avatar',
     handleFormSubmit: (formData) => {
-        renderLoading(true, '.popup_type_edit');
+        renderLoading(true, '.popup_type_edit-avatar');
         api.editAvatarRequest(formData.link)
             .then(res => {
                 avatar.style.backgroundImage = `url('${res.avatar}')`;
@@ -160,7 +163,7 @@ const avatarPopup = new PopupWithForm({
                 return res
             })
             .catch(err => console.log(err))
-            .finally(() => renderLoading(false, '.popup_type_edit'))
+            .finally(() => renderLoading(false, '.popup_type_edit-avatar'))
     }
 });
 
