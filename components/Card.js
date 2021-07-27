@@ -25,7 +25,6 @@ export default class Card {
         const _cardElementImage = this._element.querySelector('.card__image');
         const _cardElementLike = this._element.querySelector('.card__like-number');
         const _cardElementTitle = this._element.querySelector('.card__title');
-        if (this._cardData.link.startsWith('https://images.unsplash.com')) { this._cardData.link = null }
         if (this._cardData.owner && this._cardData.owner._id !== 'ce5fc158a54e19453097961d') { this._element.querySelector('.card__delete').remove() };
         this._cardData.likes.forEach(item => {
             if (item._id === 'ce5fc158a54e19453097961d') { this._element.querySelector('.card__like').classList.add('card__like_active') }
