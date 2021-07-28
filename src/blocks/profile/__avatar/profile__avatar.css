@@ -18,7 +18,7 @@
     background: #000000;
     opacity: 0;
     transition: 0.3s;
-    background-image: url('/images/edit.svg');
+    background-image: url('../../../images/edit.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 0px;

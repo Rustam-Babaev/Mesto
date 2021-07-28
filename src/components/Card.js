@@ -1,12 +1,13 @@
 export default class Card {
 
-    constructor({ cardData, handleCardClick, handleLikeClick, handledeleteCard, setEventListeners }, cardTemplate) {
+    constructor({ cardData, handleCardClick, handleLikeClick, handledeleteCard, setEventListeners, userId }, cardTemplate) {
         this._cardData = cardData;
         this._cardTemplate = cardTemplate;
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
         this._handledeleteCard = handledeleteCard;
-        this._setEventListeners = setEventListeners
+        this._setEventListeners = setEventListeners;
+        this._userId = userId;
     }
 
     _getTemplate() {
@@ -25,9 +26,9 @@ export default class Card {
         const _cardElementImage = this._element.querySelector('.card__image');
         const _cardElementLike = this._element.querySelector('.card__like-number');
         const _cardElementTitle = this._element.querySelector('.card__title');
-        if (this._cardData.owner && this._cardData.owner._id !== 'ce5fc158a54e19453097961d') { this._element.querySelector('.card__delete').remove() };
+        if (this._cardData.owner && this._cardData.owner._id !== this._userId) { this._element.querySelector('.card__delete').remove() };
         this._cardData.likes.forEach(item => {
-            if (item._id === 'ce5fc158a54e19453097961d') { this._element.querySelector('.card__like').classList.add('card__like_active') }
+            if (item._id === this._userId) { this._element.querySelector('.card__like').classList.add('card__like_active') }
         });
         _cardElementImage.src = this._cardData.link;
         _cardElementImage.alt = this._cardData.name;

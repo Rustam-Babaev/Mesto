@@ -4,6 +4,12 @@ export default class FormValidator {
         this._formsData = formsData;
         this._formElement = formElement;
         this._openButton = openButton
+        this._form = document.querySelector(this._formElement);
+        this._inputs = Array.from(this._form.querySelectorAll(this._formsData.inputSelector));
+        this._submit = this._form.querySelector(this._formsData.submitButtonSelector);
+        this._errorClass = this._formsData.errorClass;
+        this._inputErrorClass = this._formsData.inputErrorClass;
+        this._buttonDisabledClass = this._formsData.inactiveButtonClass;
     }
 
     //Метод для отображения ошибок и их скрытие
@@ -14,9 +20,10 @@ export default class FormValidator {
     }
 
     _hideInputError() {
-        this._formError.classList.remove(this._errorClass);
-        this._input.classList.remove(this._inputErrorClass);
-
+        if (this._formError) {
+            this._formError.classList.remove(this._errorClass);
+            this._input.classList.remove(this._inputErrorClass);
+        }
     }
 
     //Публичные методы для управления состоянием Submit формы
@@ -57,13 +64,6 @@ export default class FormValidator {
 
     //Метод который выполняет валидацию формы и показывает ошибки
     enableValidation() {
-        this._form = document.querySelector(this._formElement);
-        this._inputs = Array.from(this._form.querySelectorAll(this._formsData.inputSelector));
-        this._submit = this._form.querySelector(this._formsData.submitButtonSelector);
-        this._errorClass = this._formsData.errorClass;
-        this._inputErrorClass = this._formsData.inputErrorClass;
-        this._buttonDisabledClass = this._formsData.inactiveButtonClass;
-
         this._form.addEventListener('submit', evt => {
             evt.preventDefault();
         });
